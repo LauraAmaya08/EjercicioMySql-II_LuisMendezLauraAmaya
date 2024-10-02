@@ -20,17 +20,27 @@ Este sistema está enfocado en cubrir los aspectos fundamentales de la administr
 
 A partir de la tabla base, se aplican las tres formas normales principales en bases de datos para garantizar la integridad y la eficiencia en el manejo de los datos:
 
-### 1. Primera Forma Normal (1NF)
-Se asegura que cada atributo contenga solo un valor atómico. Esto significa que elementos como nombres y horas se separan en columnas individuales, evitando que se incluyan múltiples datos en un mismo campo.
+## Pasos de Normalización
 
-### 2. Segunda Forma Normal (2NF)
-Se implementa para garantizar que todos los atributos dependan únicamente de la clave primaria. Cada dato debe estar asociado a una única entidad, eliminando la posibilidad de que un atributo dependa de otra parte de la clave.
+### Paso 1: Primera Forma Normal (1FN)
 
-### 3. Tercera Forma Normal (3NF)
-Se aplica para asegurar que cada entidad contenga solo aquellos datos que le son relevantes, evitando dependencias transitivas. 
+En la tabla original, los atributos como "Horario" tienen valores compuestos (por ejemplo, "martes 10-12").
 
-Al llevar a cabo estas formas de manera correcta no fue necesario aplicar la cuarta forma normal (4N)
+Se descompuso el atributo "Horario" en varias tablas. Se creó una tabla para los días (`Dia_clase`) y otra para las horas (`Hora_clase`) de inicio y fin, asegurando que cada columna contenga valores atómicos.
 
+### Paso 2: Segunda Forma Normal (2FN)
+
+La tabla original contiene dependencias parciales. Por ejemplo, el "Docente" depende del "Curso" y no directamente de la clave primaria "Estudiante_ID".
+
+Se crearon tablas independientes para las entidades "Docente" y "Curso", eliminando la dependencia parcial. Cada una de estas tablas tiene su propio identificador único (`Docente_ID`, `Curso_ID`).
+
+### Paso 3: Tercera Forma Normal (3FN)
+
+En la tabla original, había dependencias transitivas, como el nombre y apellido del docente dependiendo de "Docente".
+
+Se descompuso la información de los docentes en una tabla separada, donde los atributos "Nombre" y "Apellido" dependen de `Docente_ID`.
+
+Al realizar las 3 formas normales de manera correcta no fue necesario usar la cuarta forma normal (4N)
 
 ## Entidad-Relación
 
