@@ -36,152 +36,86 @@ Al llevar a cabo estas formas de manera correcta no fue necesario aplicar la cua
 
 A continuación encontrarás la expliación de nuestras entidades y relaciones:
 
-### 1. **Objeto**
-   - **Entidad**: Esta tabla almacena objetos dentro del universo Marvel, como el Mjolnir o el Escudo del Capitán América.
-   - **Atributos**: 
-     - `id_objeto`: Identificador único del objeto.
-     - `nombre`: Nombre del objeto.
-     - `origen`: El origen o la historia del objeto.
-     - `limitaciones`: Limitaciones o debilidades del objeto.
-     - `estado`: Estado actual del objeto (por ejemplo, "en uso", "destruido", "perdido", etc.).
-   - **Relaciones**:
-     - Se relaciona con la tabla `Poder` a través de `Poder_de_objeto`, indicando los poderes que un objeto otorga.
-     - Se relaciona con la tabla `Personaje` a través de `Usado_por`, indicando qué personajes han usado o poseen el objeto.
-
-### 2. **Poder**
-   - **Entidad**: Almacena los poderes que pueden poseer personajes o ser otorgados por objetos.
+1. **Curso**
    - **Atributos**:
-     - `id_poder`: Identificador único del poder.
-     - `nombre`: Nombre del poder.
-     - `efecto`: Descripción del efecto principal del poder.
-     - `efecto_secundario`: Efectos secundarios asociados al poder.
-     - `requisitos`: Condiciones necesarias para adquirir el poder.
-   - **Relaciones**:
-     - Se relaciona con `Objeto` a través de `Poder_de_objeto`, indicando los poderes que provienen de objetos.
-     - Se relaciona con `Personaje` a través de `Poder_en_personaje`, indicando los poderes que un personaje posee y si están activos.
+     - `curso_id`: Identificador único del curso (clave primaria).
+     - `curso`: Nombre del curso, debe ser único.
+   - **Descripción**: Representa los diferentes cursos que ofrece la universidad.
 
-### 3. **Nacionalidad**
-   - **Entidad**: Representa las nacionalidades de los actores y directores.
+2. **Estudiante**
    - **Atributos**:
-     - `id_nacionalidad`: Identificador único de la nacionalidad.
-     - `nombre`: Nombre de la nacionalidad.
-   - **Relaciones**:
-     - Se relaciona con `Actor` y `Director`, ya que estos tienen una nacionalidad específica.
+     - `estudiante_id`: Identificador único del estudiante (clave primaria).
+     - `nombre`: Nombre del estudiante.
+     - `apellido`: Apellido del estudiante.
+   - **Descripción**: Contiene la información de los estudiantes en la universidad.
 
-### 4. **Actor**
-   - **Entidad**: Almacena información sobre los actores que interpretan a personajes en el universo Marvel.
+3. **Estudiantes_en_curso**
    - **Atributos**:
-     - `id_actor`: Identificador único del actor.
-     - `nombre`: Nombre del actor.
-     - `id_nacionalidad`: Relación con la nacionalidad del actor.
-     - `fecha_nacimiento`: Fecha de nacimiento del actor.
-   - **Relaciones**:
-     - Se relaciona con `Personaje`, indicando qué personajes son interpretados por el actor.
+     - `id`: Identificador único de la relación (clave primaria).
+     - `estudiante_id`: Referencia al estudiante (clave foránea).
+     - `curso_id`: Referencia al curso (clave foránea).
+   - **Descripción**: Representa la relación muchos a muchos entre estudiantes y cursos, indicando qué estudiantes están matriculados en qué cursos.
 
-### 5. **Especie**
-   - **Entidad**: Almacena las especies presentes en el universo Marvel, como Humanos, Asgardianos, etc.
+4. **Docente**
    - **Atributos**:
-     - `id_especie`: Identificador único de la especie.
-     - `nombre`: Nombre de la especie.
-     - `poblacion_total`: Población total de la especie.
-   - **Relaciones**:
-     - Se relaciona con `Personaje`, ya que cada personaje pertenece a una especie.
-     - Se relaciona con `Planeta` a través de `Especie_en_planeta`, indicando qué especies habitan en qué planetas.
+     - `docente_id`: Identificador único del docente (clave primaria).
+     - `nombre`: Nombre del docente.
+     - `apellido`: Apellido del docente.
+   - **Descripción**: Contiene la información de los docentes que imparten los cursos.
 
-### 6. **Personaje**
-   - **Entidad**: Almacena información sobre los personajes del universo Marvel.
+5. **Docentes_en_curso**
    - **Atributos**:
-     - `id_personaje`: Identificador único del personaje.
-     - `nombre`: Nombre del personaje.
-     - `id_actor`: Relación con el actor que interpreta al personaje.
-     - `id_especie`: Relación con la especie del personaje.
-     - `fecha_nacimiento`: Fecha de nacimiento del personaje.
-   - **Relaciones**:
-     - Se relaciona con `Recurso` a través de `Personaje_en_recurso`, indicando en qué películas o series aparece el personaje.
-     - Se relaciona con `Objeto` a través de `Usado_por`, indicando qué objetos ha usado o posee el personaje.
-     - Se relaciona con `Poder` a través de `Poder_en_personaje`, indicando qué poderes tiene y si están activos.
+     - `id`: Identificador único de la relación (clave primaria).
+     - `docente_id`: Referencia al docente (clave foránea).
+     - `curso_id`: Referencia al curso (clave foránea).
+   - **Descripción**: Representa la relación muchos a muchos entre docentes y cursos, indicando qué docentes están asignados a qué cursos.
 
-### 7. **Recurso**
-   - **Entidad**: Almacena información sobre las películas, series, etc., del universo Marvel.
+6. **Aula**
    - **Atributos**:
-     - `id_recurso`: Identificador único del recurso.
-     - `nombre`: Nombre del recurso (película, serie, etc.).
-     - `duracion_total`: Duración total del recurso.
-     - `cantidad_capitulos`: Número de capítulos si es una serie.
-     - `id_tipo`: Relación con la tabla `Tipo`, indicando si es película, serie, etc.
-     - `id_saga`: Relación con la tabla `Saga`, indicando a qué saga pertenece.
-     - `sinopsis`: Breve resumen del recurso.
-   - **Relaciones**:
-     - Se relaciona con `Personaje` a través de `Personaje_en_recurso`.
-     - Se relaciona con `Director` a través de `Director_en_recurso`.
+     - `aula_id`: Identificador único del aula (clave primaria).
+     - `numero`: Número del aula, debe ser único.
+   - **Descripción**: Representa las diferentes aulas disponibles en la universidad.
 
-### 8. **Planeta**
-   - **Entidad**: Representa los planetas en el universo Marvel, como la Tierra, Asgard, etc.
+7. **Cursos_en_aulas**
    - **Atributos**:
-     - `id_planeta`: Identificador único del planeta.
-     - `nombre`: Nombre del planeta.
-     - `poblacion`: Población del planeta.
-     - `superficie`: Superficie del planeta.
-   - **Relaciones**:
-     - Se relaciona con `Universo` a través de `Planeta_en_universo`, indicando en qué universos existe el planeta.
-     - Se relaciona con `Especie` a través de `Especie_en_planeta`, indicando qué especies habitan en ese planeta.
-     - Se relaciona con `Localidad`, que indica lugares específicos dentro del planeta.
+     - `id`: Identificador único de la relación (clave primaria).
+     - `curso_id`: Referencia al curso (clave foránea).
+     - `aula_id`: Referencia al aula (clave foránea).
+   - **Descripción**: Representa la relación entre cursos y aulas, indicando en qué aulas se imparten los cursos.
 
-### 9. **Localidad**
-   - **Entidad**: Representa lugares dentro de los planetas, como ciudades, países, etc.
+8. **Dia_clase**
    - **Atributos**:
-     - `id_localidad`: Identificador único de la localidad.
-     - `nombre`: Nombre de la localidad.
-     - `id_planeta`: Relación con el planeta en el que se encuentra la localidad.
-     - `ubicacion`: Descripción de la ubicación.
-   - **Relaciones**:
-     - Se relaciona con `Planeta`, indicando en qué planeta se encuentra.
-     - Se relaciona con `Escena`, indicando qué escenas tienen lugar en la localidad.
+     - `dia_id`: Identificador único del día (clave primaria).
+     - `dia`: Nombre del día (por ejemplo, "Lunes").
+   - **Descripción**: Representa los días de la semana en que se imparten las clases.
 
-### 10. **Escena**
-   - **Entidad**: Representa escenas específicas de las películas o series.
+9. **Hora_clase**
    - **Atributos**:
-     - `id_escena`: Identificador único de la escena.
-     - `id_recurso`: Relación con el recurso (película o serie) en el que aparece la escena.
-     - `id_localidad`: Relación con la localidad donde ocurre la escena.
-     - `descripcion`: Descripción de la escena.
-     - `fecha`: Fecha en que ocurre la escena.
-     - `duracion`: Duración de la escena.
-   - **Relaciones**:
-     - Se relaciona con `Recurso`, indicando en qué película o serie ocurre la escena.
-     - Se relaciona con `Localidad`, indicando dónde ocurre.
+     - `hora_id`: Identificador único de la hora (clave primaria).
+     - `hora_inicio`: Hora de inicio de la clase.
+     - `hora_fin`: Hora de fin de la clase.
+   - **Descripción**: Define los horarios en los que se imparten las clases.
 
-### 11. **Saga**
-   - **Entidad**: Representa las sagas dentro del universo Marvel, como la Saga del Infinito.
-   - **Atributos**:
-     - `id_saga`: Identificador único de la saga.
-     - `nombre`: Nombre de la saga.
-   - **Relaciones**:
-     - Se relaciona con `Recurso`, indicando qué películas o series forman parte de una saga.
+10. **Horario**
+    - **Atributos**:
+      - `horario_id`: Identificador único del horario (clave primaria).
+      - `dia_id`: Referencia al día de clase (clave foránea).
+      - `hora_id`: Referencia a la hora de clase (clave foránea).
+    - **Descripción**: Combina días y horas para definir cuándo se imparten las clases.
 
-### 12. **Tipo**
-   - **Entidad**: Representa el tipo de recurso, como película, serie, etc.
-   - **Atributos**:
-     - `id_tipo`: Identificador único del tipo.
-     - `tipo`: Nombre del tipo (película, serie, etc.).
-   - **Relaciones**:
-     - Se relaciona con `Recurso`, indicando el tipo de recurso.
+11. **Horarios_de_cursos**
+    - **Atributos**:
+      - `id`: Identificador único de la relación (clave primaria).
+      - `horario_id`: Referencia al horario (clave foránea).
+      - `curso_id`: Referencia al curso (clave foránea).
+    - **Descripción**: Representa la relación entre los cursos y sus horarios, indicando en qué días y horas se imparten.
 
-### 13. **Universo**
-   - **Entidad**: Representa los diferentes universos del multiverso Marvel.
-   - **Atributos**:
-     - `id_universo`: Identificador único del universo.
-     - `nombre`: Nombre del universo.
-   - **Relaciones**:
-     - Se relaciona con `Planeta` a través de `Planeta_en_universo`, indicando en qué universos existe cada planeta.
+## Relaciones
 
-### Relaciones principales:
-- **Poder** ↔ **Personaje**: Relación de qué poderes tiene cada personaje.
-- **Objeto** ↔ **Personaje**: Relación de qué personajes usan o son propietarios de qué objetos.
-- **Planeta** ↔ **Especie**: Relación de qué especies habitan en qué planetas.
-- **Recurso** ↔ **Personaje**: Relación de qué personajes aparecen en qué recursos (películas o series).
-- **Recurso** ↔ **Director**: Relación de qué directores han dirigido qué recursos.
-- **Escena** ↔ **Recurso**: Relación de qué escenas pertenecen a qué recursos.
+- **Estudiantes_en_curso** establece una relación muchos a muchos entre **Estudiante** y **Curso**.
+- **Docentes_en_curso** establece una relación muchos a muchos entre **Docente** y **Curso**.
+- **Cursos_en_aulas** establece una relación entre **Curso** y **Aula**, indicando en qué aula se imparte cada curso.
+- **Horarios_de_cursos** vincula los **Cursos** con sus **Horarios**, permitiendo conocer cuándo se imparten.
 
 
 ## Diagrama
