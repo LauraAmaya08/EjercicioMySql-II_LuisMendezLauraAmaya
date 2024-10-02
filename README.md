@@ -16,6 +16,20 @@ Este sistema está enfocado en cubrir los aspectos fundamentales de la administr
    ```
    
 ## Normalización
+<img src="images/image (4).webp" alt="Diagrama de relación de entidad" width="auto" />
+
+A partir de la tabla base, se aplican las tres formas normales principales en bases de datos para garantizar la integridad y la eficiencia en el manejo de los datos:
+
+### 1. Primera Forma Normal (1NF)
+Se asegura que cada atributo contenga solo un valor atómico. Esto significa que elementos como nombres y horas se separan en columnas individuales, evitando que se incluyan múltiples datos en un mismo campo.
+
+### 2. Segunda Forma Normal (2NF)
+Se implementa para garantizar que todos los atributos dependan únicamente de la clave primaria. Cada dato debe estar asociado a una única entidad, eliminando la posibilidad de que un atributo dependa de otra parte de la clave.
+
+### 3. Tercera Forma Normal (3NF)
+Se aplica para asegurar que cada entidad contenga solo aquellos datos que le son relevantes, evitando dependencias transitivas. 
+
+Al llevar a cabo estas formas de manera correcta no fue necesario aplicar la cuarta forma normal (4N)
 
 
 ## Entidad-Relación
@@ -171,7 +185,7 @@ A continuación encontrarás la expliación de nuestras entidades y relaciones:
 
 
 ## Diagrama
-<img src="images/ERDDiagram_MARVEL.jpg" alt="Diagrama de relación de entidad" width="auto" />
+<img src="images/drawSQL-image-export-2024-10-02 (3).png" alt="Diagrama de relación de entidad" width="auto" />
      
 ## Contacto
 Para cualquier pregunta o sugerencia, por favor contacta a:
