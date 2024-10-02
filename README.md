@@ -16,7 +16,7 @@ Este sistema está enfocado en cubrir los aspectos fundamentales de la administr
    ```
    
 ## Normalización
-<img src="images/image (4).webp" alt="Diagrama de relación de entidad" width="auto" />
+<img src="images/image (5).webp" alt="Diagrama de relación de entidad" width="auto" />
 
 A partir de la tabla base, se aplican las tres formas normales principales en bases de datos para garantizar la integridad y la eficiencia en el manejo de los datos:
 
